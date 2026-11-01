@@ -1,5 +1,5 @@
 #Practical 1
-'''
+```
 name = input("Enter your Name: ")
 reg_id = input("Enter your ID: ")
 br = input("Enter Branch: ")
@@ -18,4 +18,4 @@ print(f"Your Name is {name}")
 print(f"You scored {total} out of 500")
 print(f"Average: {ave:.2f}")
 print(f"Percentage: {per:.2f}%")
-'''
+```
