@@ -133,29 +133,22 @@ def cart_total():
         grand += total(products[name], cart[name])
     return grand
 
-products = {
-    "Shirt": 350,
-    "Mug": 150,
-    "Badge": 50
-}
-
+products = {"Shirt": 350, "Mug": 150, "Badge": 50}
 cart = {}
+menu = ["View Products", "Add Item", "Update Item", "Remove Item", "Total Amount", "Show Bill", "Exit"]
 
 while True:
-    print("1. View Products")
-    print("2. Add Item")
-    print("3. Update Item")
-    print("4. Remove Item")
-    print("5. Total Amount")
-    print("6. Show Bill")
-    print("7. Exit")
-
+    print("\n--- Shopping Cart ---")
+    count = 1
+    for option in menu:
+        print(count, option)
+        count += 1
     choice = int(input("Enter choice: "))
 
     if choice == 1:
+        print("Products:")
         for name in products:
-            print(name, products[name])
-
+            print(name, "Rs", products[name])
     elif choice == 2:
         name = input("Product name: ").capitalize()
         if name in products:
@@ -164,18 +157,47 @@ while True:
                 cart[name] += qty
             else:
                 cart[name] = qty
-
+            print("Item added")
+        else:
+            print("Product not found")
+    elif choice == 3:
+        name = input("Product name: ").capitalize()
+        if name in cart:
+            cart[name] = int(input("New quantity: "))
+            print("Item updated")
+        else:
+            print("Item not in cart")
+    elif choice == 4:
+        name = input("Product name: ").capitalize()
+        if name in cart:
+            del cart[name]
+            print("Item removed")
+        else:
+            print("Item not in cart")
     elif choice == 5:
-        print("Total Amount:", cart_total())
-
+        print("Total Amount: Rs", cart_total())
+    elif choice == 6:
+        if len(cart) == 0:
+            print("Cart is empty")
+        else:
+            print("\n--- BILL ---")
+            for name in cart:
+                price = products[name]
+                qty = cart[name]
+                print(f"{name}: {qty} x {price} = {total(price, qty)}")
+            print("----------------")
+            print("Grand Total: Rs", cart_total())
     elif choice == 7:
+        print("Thank you for shopping!")
         break
+    else:
+        print("Invalid choice")
+     
 ```
 Practical 7 contact book program
 ```
 def add_contact(contacts):
     name = input("Enter name: ").capitalize()
-
     if name in contacts:
         print("Contact already exists")
     else:
@@ -184,74 +206,110 @@ def add_contact(contacts):
 
 def search_contact(contacts):
     name = input("Enter name to search: ").capitalize()
-
     if name in contacts:
         print(name, "-", contacts[name])
     else:
         print("Contact not found")
 
-contacts = {}
+def update_contact(contacts):
+    name = input("Enter name to update: ").capitalize()
+    if name in contacts:
+        contacts[name] = input("Enter new phone number: ")
+        print("Contact updated")
+    else:
+        print("Contact not found")
 
+def delete_contact(contacts):
+    name = input("Enter name to delete: ").capitalize()
+    if name in contacts:
+        del contacts[name]
+        print("Contact deleted")
+    else:
+        print("Contact not found")
+
+def display_contacts(contacts):
+    if len(contacts) == 0:
+        print("Contact book is empty")
+    else:
+        print("\n--- Contacts ---")
+        for name in contacts:
+            print(name, "-", contacts[name])
+
+contacts = {}
 while True:
+    print("\n--- Contact Book ---")
     print("1. Add Contact")
     print("2. Search Contact")
     print("3. Update Contact")
     print("4. Delete Contact")
-    print("5. Display Contacts")
+    print("5. Display All Contacts")
     print("6. Exit")
-
     choice = int(input("Enter choice: "))
-
+    
     if choice == 1:
         add_contact(contacts)
     elif choice == 2:
         search_contact(contacts)
+    elif choice == 3:
+        update_contact(contacts)
+    elif choice == 4:
+        delete_contact(contacts)
+    elif choice == 5:
+        display_contacts(contacts)
     elif choice == 6:
+        print("Goodbye!")
         break
+    else:
+        print("Invalid choice")
 ```
 Practical 8 Factorial and fibonacci series
-A. Factorial using iteration
 ```
+# Factorial - Iterative Method
 number = int(input("Enter a number: "))
 factorial = 1
-
 if number < 0:
     print("Factorial is not defined for negative numbers")
 else:
     for i in range(1, number + 1):
         factorial *= i
+    print(f"Factorial of {number} is {factorial}")
 
-    print(factorial)
-```
-B. Factorial using recursion
-```
+# Factorial - Recursive Method
 def factorial(number):
     if number == 0 or number == 1:
         return 1
-
     return number * factorial(number - 1)
-```
-C. Fibonacci using iteration
-```
-number = int(input("Enter a position: "))
 
-first = 0
-second = 1
+num = int(input("Enter a number: "))
+if num < 0:
+    print("Factorial is not defined for negative numbers")
+else:
+    print(f"Factorial of {num} is {factorial(num)}")
 
-for i in range(number):
-    third = first + second
-    first = second
-    second = third
-
-print(first)
-```
-D. Fibonacci using recursion
-```
+# Fibonacci Series - Recursive Method
 def fibonacci(number):
     if number == 0 or number == 1:
         return number
-
     return fibonacci(number - 1) + fibonacci(number - 2)
+
+num = int(input("Enter a position: "))
+if num < 0:
+    print("Fibonacci is not defined for negative positions")
+else:
+    print(f"Fibonacci number at position {num} is {fibonacci(num)}")
+
+# Fibonacci Series - Iterative Method
+number = int(input("Enter a position: "))
+if number < 0:
+    print("Fibonacci is not defined for negative positions")
+else:
+    first = 0
+    second = 1
+    for i in range(number):
+        third = first + second
+        first = second
+        second = third
+    print(f"Fibonacci number at position {number} is {first}")
 ```
 Practical 9 Bank acc program
 ```
